@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bienvenido a Delicias a la Brasa</title>
+    <style>
+        /* Estilos para el cuerpo del correo */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Estilos para el contenedor del correo */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para el encabezado del correo */
+        .header {
+            background-color: #3e64ff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        /* Estilos para el contenido del correo */
+        .content {
+            padding: 20px;
+        }
+
+        /* Estilos para el pie del correo */
+        .footer {
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 10px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        /* Estilos para los enlaces */
+        a {
+            color: #3e64ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bienvenido a Delicias a la Brasa</h1>
+        </div>
+        <div class="content">
+            <p>¡Hola {{ user.get_full_name }}!</p>
+
+            <p>Gracias por registrarte en Delicias a la Brasa. Nos complace tenerte como parte de nuestra comunidad.</p>
+
+            <p>Somos un restaurante especializado en asados y parrilladas, donde buscamos ofrecer la mejor experiencia culinaria a nuestros clientes.</p>
+
+            <p>Te mantendremos informado acerca de nuestras promociones, eventos especiales y nuevos platillos a través de este correo electrónico.</p>
+
+            <p>¡Esperamos que disfrutes de nuestros deliciosos platillos y tengas una experiencia inolvidable!</p>
+
+            <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en <a href="mailto:contacto@deliciasalabrasa.com">contactarnos</a>.</p>
+
+            <p>Atentamente,<br>El equipo de Delicias a la Brasa</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ year }} Delicias a la Brasa. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>
