@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'dj_rest_auth',
     'drf_yasg',
+    'accounts',
+    'general',
     'security',
 ]
 SITE_ID = 1
@@ -88,7 +90,7 @@ WSGI_APPLICATION = 'process_automation.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": 'backlog',
+        "NAME": 'automation_process',
         "USER": 'darius',
         "PASSWORD": 'Darius20',
         "HOST": 'localhost',
