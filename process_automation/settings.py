@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'sequences.apps.SequencesConfig',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -36,11 +37,10 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'dj_rest_auth',
     'drf_yasg',
-    'sequences.apps.SequencesConfig',
     'accounts',
     'general',
-    'orders',
     'security',
+    'orders',
 ]
 SITE_ID = 1
 
@@ -111,7 +111,6 @@ REST_FRAMEWORK = {
 
     ),
 }
-#this part is for logining from google
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {

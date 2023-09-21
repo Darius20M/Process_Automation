@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from general.serializers import SubjectSerializer
+from accounts.serializers.user_list_serializer import UserListSerializer
+from general.serializers import SubjectSerializer, CareerSerializer
 from orders.models import RequesttutoringModel
 
 
@@ -9,24 +10,24 @@ class RequestTutoringSerializer(serializers.ModelSerializer):
     subject_id = serializers.IntegerField(required=True, write_only=True)
     career = CareerSerializer(many=False, read_only=True)
     career_id = serializers.IntegerField(required=True, write_only=True)
-    user = UserSerializer(many=False, read_only=True)
+    user = UserListSerializer(many=False, read_only=True)
     user_id = serializers.IntegerField(required=True, write_only=True)
-    user_verified = UserSerializer(many=False, read_only=True)
+    user_verified = UserListSerializer(many=False, read_only=True)
     user_verified_id = serializers.IntegerField(required=True, write_only=True)
     class Meta:
         model = RequesttutoringModel
         fields = (
             'id',
             'request_number',
-            'reason'
+            'reason',
             'subject',
-            'subject_id'
+            'subject_id',
             'user',
-            'user_id'
+            'user_id',
             'career',
-            'career_id'
+            'career_id',
             'user_verified',
-            'user_verified_id'
+            'user_verified_id',
             'comment',
             'status',
             'created',

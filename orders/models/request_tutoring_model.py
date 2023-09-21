@@ -8,7 +8,7 @@ from sequences import get_next_value
 
 class RequesttutoringModel(models.Model):
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='verify_requests_t', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     career = models.ForeignKey('general.CareerModel', on_delete=models.PROTECT)
     request_number = models.CharField(max_length=180, unique=True)
     reason=models.TextField(null=True, blank=True)

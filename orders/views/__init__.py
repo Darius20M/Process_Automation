@@ -1,2 +1,4 @@
 from .request_secc_viewset import RequestSeccViewSet
 from .request_tutoring_viewset import RequestTutoringViewSet
+"""from .gerenate_request_secc_viewset import GenerateRequestSeccViewSet
+from .gerenate_request_tutoring_viewset import GenerateRequestTutoringViewSet"""

@@ -23,7 +23,7 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('accounts/', include('accounts.urls')),
     re_path('general/', include('general.urls')),
-    re_path('orders/', include('accounts.urls')),
+    re_path('orders/', include('orders.urls')),
     re_path('security/', include('security.urls')),
     re_path('auth/', include('dj_rest_auth.urls')),
     re_path('auth/registration/', include('dj_rest_auth.registration.urls'))
