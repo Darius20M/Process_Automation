@@ -19,6 +19,9 @@ class DeanModel(models.Model):
     enrollment_status = models.CharField(max_length=20, choices=(('Enrolled', 'Enrolled'), ('Graduated', 'Graduated')))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
+    class Meta:
+        verbose_name = ('Dean')
+        verbose_name_plural = ('Deans')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

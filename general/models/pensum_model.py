@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.utils import timezone
 
@@ -19,7 +20,9 @@ class PensumModel(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
-
+    class Meta:
+        verbose_name = ('Pensum')
+        verbose_name_plural = ('Pensums')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

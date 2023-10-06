@@ -21,6 +21,9 @@ class TeacherModel(models.Model):
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
 
+    class Meta:
+        verbose_name = ('Teacher')
+        verbose_name_plural = ('Teachers')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

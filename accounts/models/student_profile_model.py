@@ -5,10 +5,12 @@ from django.conf import settings
 
 class StudentProfileModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    student_id = models.CharField(max_length=8, unique=True)
+    student_id = models.CharField(max_length=9, unique=True)
     date_of_birth = models.DateField()
+    career = models.ForeignKey('general.CareerModel',on_delete=models.PROTECT)
     role = models.ForeignKey('accounts.RoleModel',on_delete=models.PROTECT)
     gender = models.CharField(max_length=10, choices=(('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')))
     address = models.TextField()
@@ -19,6 +21,10 @@ class StudentProfileModel(models.Model):
     enrollment_status = models.CharField(max_length=20, default='N/A', choices=(('Enrolled', 'Enrolled'), ('Graduated', 'Graduated')))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        verbose_name = ('Student')
+        verbose_name_plural = ('Students')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

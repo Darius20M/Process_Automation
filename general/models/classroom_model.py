@@ -12,7 +12,9 @@ class ClassroomModel(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
-
+    class Meta:
+        verbose_name = ('Classroom')
+        verbose_name_plural = ('Classrooms')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

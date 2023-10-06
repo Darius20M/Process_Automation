@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'general',
     'security',
+    'catalog',
     'orders',
 ]
 SITE_ID = 1

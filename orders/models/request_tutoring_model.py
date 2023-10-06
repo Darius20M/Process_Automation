@@ -20,7 +20,9 @@ class RequesttutoringModel(models.Model):
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
 
-
+    class Meta:
+        verbose_name = ('Request tutoring')
+        verbose_name_plural = ('Request tutorings')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

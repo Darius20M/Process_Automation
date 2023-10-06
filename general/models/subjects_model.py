@@ -10,7 +10,11 @@ class SubjectModel(models.Model):
     p_hours = models.PositiveIntegerField()
     t_hours = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=(('Active', 'Active'), ('Inactive', 'Inactive') ))
-
+    created = models.DateTimeField(default=timezone.now, editable=False)
+    modified = models.DateTimeField(default=timezone.now, editable=False)
+    class Meta:
+        verbose_name = ('Subject')
+        verbose_name_plural = ('Subjects ')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

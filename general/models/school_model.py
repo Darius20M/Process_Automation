@@ -13,7 +13,9 @@ class SchoolModel(models.Model):
     location = models.CharField(max_length=200, blank=True, null=True)
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
-
+    class Meta:
+        verbose_name = ('School')
+        verbose_name_plural = ('Schools')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

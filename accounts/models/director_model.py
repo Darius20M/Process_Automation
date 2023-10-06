@@ -19,7 +19,9 @@ class DirectorModel(models.Model):
     enrollment_status = models.CharField(max_length=20, choices=(('Enrolled', 'Enrolled'), ('Graduated', 'Graduated')))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
-
+    class Meta:
+        verbose_name = ('Director')
+        verbose_name_plural = ('Directors')
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

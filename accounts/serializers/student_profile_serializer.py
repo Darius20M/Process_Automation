@@ -4,6 +4,7 @@ from accounts.serializers.user_list_serializer import UserListSerializer
 from accounts.serializers.role_serializer import RoleSerializer
 
 from accounts.models import StudentProfileModel
+from general.serializers import CareerSerializer
 
 
 class StudentProfileSerializer(serializers.ModelSerializer):
@@ -11,6 +12,9 @@ class StudentProfileSerializer(serializers.ModelSerializer):
     role_id = serializers.IntegerField(required=True, write_only=True)
     user = UserListSerializer(many=False, read_only=True)
     user_id = serializers.IntegerField(required=True, write_only=True)
+    career = CareerSerializer(many=False, read_only=True)
+    career_id = serializers.IntegerField(required=True, write_only=True)
+
     class Meta:
         model = StudentProfileModel
         fields = (
@@ -28,12 +32,15 @@ class StudentProfileSerializer(serializers.ModelSerializer):
             'address',
             'contact_phone',
             'email',
+            'career',
+            'career_id',
             'role',
             'role_id',
             'created',
             'modified',
         )
         read_only_fields = ('id', 'student_id','identification_number', 'created', 'modified',)
-
+#poner un array de la carrera student y karla va mostar la activa
+#poner un hisotiral model y en un campo virtual el indice
 
 
