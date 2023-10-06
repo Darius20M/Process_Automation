@@ -18,4 +18,5 @@ class SubjectStudentModelAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created', 'modified')
 
+
 admin.site.register(SubjectStudentModel, SubjectStudentModelAdmin)

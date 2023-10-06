@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,3 +166,120 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "UCSD",
+    "site_header": "UCSD",
+    "site_brand": "UCSD",
+    "login_logo": None,
+
+    "login_logo_dark": None,
+    "site_logo_classes": "img-circle",
+
+    "site_icon": None,
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to the UCSD Admin",
+
+    "copyright": "Darius de la cruz",
+    "search_model": ["auth.User", "auth.Group"],
+
+    "user_avatar": None,
+
+    "topmenu_links": [
+
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.User"},
+        {"app": "books"},
+    ],
+
+    "usermenu_links": [
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    "custom_links": {
+        "books": [{
+            "name": "Make Messages",
+            "url": "make_messages",
+            "icon": "fas fa-comments",
+            "permissions": ["books.view_book"]
+        }]
+    },
+
+    "messages": {
+        "extra_tags": "alert-danger",  # Agrega clases CSS adicionales a los mensajes de error.
+        "error_tags": "alert-danger",  # Clases CSS para mensajes de error.
+        "warning_tags": "alert-warning",  # Clases CSS para mensajes de advertencia.
+        "info_tags": "alert-info",  # Clases CSS para mensajes informativos.
+        "success_tags": "alert-success",  # Clases CSS para mensajes de éxito.
+    },
+    "colors": {
+        "primary": "#28a745",  # Cambia este valor al color verde que desees
+        "secondary": "#6c757d",
+        "info": "#17a2b8",
+        "danger": "#dc3545",
+        "warning": "#ffc107",
+        "success": "#28a745",  # También cambia este valor para que coincida con el color principal
+    },
+
+    "icons": {
+        "auth": "fas fa-user-lock",  # Cambia el ícono de autenticación
+        "auth.user": "fas fa-user-circle",  # Cambia el ícono de usuario
+        "auth.Group": "fas fa-users",  # Cambia el ícono de grupo
+    },
+    "default_icon_parents": "fas fa-building",  # Cambia el ícono predeterminado para aplicaciones
+    "default_icon_children": "fas fa-cogs",  # Cambia el ícono predeterminado para modelos
+
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": True,
+
+    "changeform_format": "single",
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+
+
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-navy",
+    "navbar": "navbar-navy navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-success",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
+}
