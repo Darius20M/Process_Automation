@@ -9,7 +9,7 @@ class ClassModel(models.Model):
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)
     teacher = models.ForeignKey('accounts.TeacherModel', on_delete=models.PROTECT)
     period = models.ForeignKey('general.AcademicPeriodModel', on_delete=models.PROTECT)
-    secc = models.CharField(blank=True, null=True)
+    secc = models.CharField(max_length=10, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
