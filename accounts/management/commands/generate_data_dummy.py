@@ -33,14 +33,6 @@ class Command(BaseCommand):
 
     def __init__(self, stdout=None, stderr=None, no_color=False, force_color=False):
         super().__init__(stdout, stderr, no_color, force_color)
-        self.fake = None
-
-    def generate_teacher_id(self):
-        current_year = timezone.now().year
-        random_digits = ''.join([str(random.randint(0, 9)) for _ in range(4)])
-        teacher_id = f"{current_year}-{random_digits}"
-        return teacher_id
-
 
     def handle(self, *args, **options):
         self.stdout.write(
@@ -48,8 +40,7 @@ class Command(BaseCommand):
         )
         fake = Faker()
 
-        for i in range(1,100):
-            print(self.generate_teacher_id())
+        for i in range(1, 10):
 
             user = User.objects.create_user(
                 username=self.is_user_already(),
@@ -57,22 +48,33 @@ class Command(BaseCommand):
                 password='Test12345',
                 first_name=fake.unique.first_name(),
                 last_name=fake.unique.last_name()
-                )
-
-            role = RoleModel.objects.get(code='student_rol')  # Reemplaza 'NombreDelRol' con el nombre del rol
-
-            student_profile = StudentProfileModel.objects.create(
-                user=user,
-                first_name=fake.first_name(),
-                last_name=fake.last_name(),
-                student_id=user.username,
-                date_of_birth=fake.date_of_birth(),
-                role=role,
-                gender=fake.random_element(elements=('Male', 'Female', 'Other')),
-                address=fake.address()[0:255],
-                contact_phone=fake.phone_number()[0:14],
-                email=fake.unique.email(),
-                identification_number=fake.unique.random_number(digits=10),
-
             )
+
+            for i in range(1,100):
+
+                user = User.objects.create_user(
+                    username=self.is_user_already(),
+                    email=fake.unique.email(),
+                    password='Test12345',
+                    first_name=fake.unique.first_name(),
+                    last_name=fake.unique.last_name()
+                    )
+
+                role = RoleModel.objects.get(code='student_rol')  # Reemplaza 'NombreDelRol' con el nombre del rol
+
+                student_profile = StudentProfileModel.objects.create(
+                    user=user,
+                    first_name=fake.first_name(),
+                    last_name=fake.last_name(),
+                    student_id=user.username,
+                    #career
+                    date_of_birth=fake.date_of_birth(),
+                    role=role,
+                    gender=fake.random_element(elements=('Male', 'Female', 'Other')),
+                    address=fake.address()[0:255],
+                    contact_phone=fake.phone_number()[0:14],
+                    email=fake.unique.email(),
+                    identification_number=fake.unique.random_number(digits=10),
+
+                )
 

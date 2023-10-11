@@ -25,6 +25,9 @@ class StudentProfileModel(models.Model):
     class Meta:
         verbose_name = ('Student')
         verbose_name_plural = ('Students')
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.student_id)
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

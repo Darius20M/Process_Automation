@@ -15,6 +15,8 @@ class CareerModel(models.Model):
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
 
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = ('Career')
         verbose_name_plural = ('Careers')

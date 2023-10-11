@@ -3,8 +3,8 @@ from django.utils import timezone
 
 class SchoolModel(models.Model):
     name = models.CharField(max_length=100)
-    director = models.ForeignKey('accounts.DirectorModel', on_delete=models.PROTECT)
-    faculty = models.ForeignKey('general.FacultyModel', on_delete=models.PROTECT)
+    director = models.ForeignKey('accounts.DirectorModel', related_name='schools',on_delete=models.PROTECT)
+    faculty = models.ForeignKey('general.FacultyModel',  related_name='schools',on_delete=models.PROTECT)
     description = models.TextField(blank=True, null=True)
     established_date = models.DateField()
     website = models.URLField(blank=True, null=True)
@@ -13,6 +13,9 @@ class SchoolModel(models.Model):
     location = models.CharField(max_length=200, blank=True, null=True)
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = ('School')
         verbose_name_plural = ('Schools')

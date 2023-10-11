@@ -10,6 +10,7 @@ class TeacherModel(models.Model):
     last_name = models.CharField(max_length=100)
     teacher_id = models.CharField(max_length=8, unique=True)
     date_of_birth = models.DateField()
+    school = models.ForeignKey('general.SchoolModel',on_delete=models.PROTECT)
     role = models.ForeignKey('accounts.RoleModel',on_delete=models.PROTECT)
     gender = models.CharField(max_length=10, choices=(('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')))
     address = models.TextField()
@@ -24,6 +25,8 @@ class TeacherModel(models.Model):
     class Meta:
         verbose_name = ('Teacher')
         verbose_name_plural = ('Teachers')
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.teacher_id)
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

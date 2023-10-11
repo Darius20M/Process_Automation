@@ -1,7 +1,5 @@
-
 import os
 from pathlib import Path
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -161,6 +159,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -175,20 +174,20 @@ JAZZMIN_SETTINGS = {
 
     "login_logo_dark": None,
     "site_logo_classes": "img-circle",
-
-    "site_icon": None,
-
+    "site_logo": "img/LogoFacultadCienciasytecnologia.png",
+    "site_icon": "img/pru.png",
+    "show_title_ajax": True,
     # Welcome text on the login screen
     "welcome_sign": "Welcome to the UCSD Admin",
 
     "copyright": "Darius de la cruz",
     "search_model": ["auth.User", "auth.Group"],
 
-    "user_avatar": None,
+    "user_avatar": "img/man.png",
 
     "topmenu_links": [
 
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         {"model": "auth.User"},
         {"app": "books"},
@@ -206,6 +205,7 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
     "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+
     "custom_links": {
         "books": [{
             "name": "Make Messages",
@@ -234,10 +234,15 @@ JAZZMIN_SETTINGS = {
     "icons": {
         "auth": "fas fa-user-lock",  # Cambia el ícono de autenticación
         "auth.user": "fas fa-user-circle",  # Cambia el ícono de usuario
+        "accounts.DeanModel": "fas fa-user-circle",
+        "accounts.TeacherModel": "fas fa-user-circle",
+        "accounts.DirectorModel": "fas fa-user-circle",
+        "accounts.StudentProfileModel": "fas fa-user-circle",
+        "accounts.RoleModel": "fas fa-cog",
         "auth.Group": "fas fa-users",  # Cambia el ícono de grupo
     },
     "default_icon_parents": "fas fa-building",  # Cambia el ícono predeterminado para aplicaciones
-    "default_icon_children": "fas fa-cogs",  # Cambia el ícono predeterminado para modelos
+    "default_icon_children": "fas fa-building",  # Cambia el ícono predeterminado para modelos
 
     "related_modal_active": False,
     "custom_css": None,
@@ -248,7 +253,6 @@ JAZZMIN_SETTINGS = {
     "changeform_format": "single",
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
 
-
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -256,7 +260,7 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
+    "brand_colour": "navbar-navy",
     "accent": "accent-navy",
     "navbar": "navbar-navy navbar-dark",
     "no_navbar_border": False,

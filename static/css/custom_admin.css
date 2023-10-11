@@ -1,0 +1,5 @@
+/* Estilo para el logo de inicio de sesión */
+#login-logo img {
+    max-width: 100%; /* Ajusta el ancho máximo al tamaño del contenedor */
+    height: auto; /* Mantiene la proporción de aspecto original */
+}

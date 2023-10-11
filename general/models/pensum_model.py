@@ -20,6 +20,9 @@ class PensumModel(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = ('Pensum')
         verbose_name_plural = ('Pensums')

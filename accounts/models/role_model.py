@@ -12,6 +12,9 @@ class RoleModel(models.Model):
     class Meta:
         verbose_name = ('Role')
         verbose_name_plural = ('Roles')
+
+    def __str__(self):
+        return self.name
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = timezone.now()

@@ -12,6 +12,9 @@ class SubjectModel(models.Model):
     status = models.CharField(max_length=20, choices=(('Active', 'Active'), ('Inactive', 'Inactive') ))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = ('Subject')
         verbose_name_plural = ('Subjects ')

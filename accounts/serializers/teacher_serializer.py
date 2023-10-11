@@ -4,6 +4,7 @@ from accounts.serializers.user_list_serializer import UserListSerializer
 from accounts.serializers.role_serializer import RoleSerializer
 
 from accounts.models import DeanModel, TeacherModel
+from general.serializers import SchoolSerializer
 
 
 class TeacherSerializer(serializers.ModelSerializer):
@@ -11,6 +12,8 @@ class TeacherSerializer(serializers.ModelSerializer):
     role_id = serializers.IntegerField(required=True, write_only=True)
     user = UserListSerializer(many=False, read_only=True)
     user_id = serializers.IntegerField(required=True, write_only=True)
+    school = SchoolSerializer(many=False, read_only=True)
+    school_id = serializers.IntegerField(required=True, write_only=True)
     class Meta:
         model = TeacherModel
         fields = (
@@ -28,6 +31,8 @@ class TeacherSerializer(serializers.ModelSerializer):
             'address',
             'contact_phone',
             'email',
+            'school',
+            'school_id',
             'role',
             'role_id',
             'created',
