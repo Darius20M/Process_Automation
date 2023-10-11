@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'process_automation.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://darius:5uwHtR7awof8L32s0fwthSo0WAM6l64o@dpg-ckivmaomccbs73bua8dg-a.oregon-postgres.render.com:5432/ucsd_data',
+        default='postgres://darius:gcRmD3k8pM8d4cFwiNnUMdrijnhRiGez@dpg-ckj1lqomccbs73cddqfg-a.oregon-postgres.render.com/ucsd_data_ayrm',
         conn_max_age=600
         )}
 

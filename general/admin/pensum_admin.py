@@ -9,7 +9,7 @@ class PensumInline(admin.TabularInline):
 class PensumModelAdmin(admin.ModelAdmin):
     inlines = (PensumInline,)
 
-    list_display = ('name', 'school', 'start_year', 'end_year', 'total_credits', 'total_hours', 'total_hours_p', 'total_hours_t', 'total_subject', 'version', 'status', 'created', 'modified')
+    list_display = ('name', 'school', 'start_year', 'end_year', 'total_credits', 'total_hours', 'total_hours_p', 'total_hours_t', 'total_subject', 'version', 'status')
     list_filter = ('status', 'school')
     search_fields = ('name', 'description')
     list_per_page = 20
