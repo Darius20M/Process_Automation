@@ -1,6 +1,0 @@
-from .career_student_serializer import CareerStudentSerializer
-from .class_serializer import ClassSerializer
-from .schedule_class_serializer import ScheduleClassSerializer
-from .schedule_student_serializer import ScheduleStudentSerializer
-from .subject_student_serializer import SubjectStudentSerializer
-

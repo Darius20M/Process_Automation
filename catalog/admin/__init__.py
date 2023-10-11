@@ -1,5 +1,0 @@
-from .schedule_student_admin import ScheduleStudentModelAdmin
-from .subject_student_admin import SubjectStudentModelAdmin
-from .schedule_class_admin import ScheduleClassModelAdmin
-from .careers_students_admin import CareerStudentModelAdmin
-from .class_admin import ClassModelAdmin
