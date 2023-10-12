@@ -16,7 +16,7 @@ class PensumModel(models.Model):
     total_hours_p = models.PositiveIntegerField(blank=True, null=True)
     total_hours_t = models.PositiveIntegerField(blank=True, null=True)
     total_subject = models.PositiveIntegerField(blank=True, null=True)
-    version = models.CharField(max_length=10)
+    version = models.CharField(max_length=10, null= True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
