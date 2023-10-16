@@ -20,7 +20,6 @@ class PensumSubjectSerializer(serializers.ModelSerializer):
             'pensum',
             'pensum_id',
             'prerequisites',
-            'is_tutoring',
             'period',
             'description',
             'status',
