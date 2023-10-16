@@ -5,7 +5,7 @@ from accounts.models import StudentProfileModel, RoleModel
 
 
 class StudentProfileAdmin(admin.ModelAdmin):
-    list_display = ('student_id', 'first_name', 'last_name', 'role', 'enrollment_status')
+    list_display = ('student_id', 'full_name','date_of_birth', 'email', 'gender', 'enrollment_status')
     list_filter = ('role', 'enrollment_status', 'gender')
     search_fields = ('student_id', 'first_name', 'last_name', 'email')
     list_per_page = 20
@@ -20,7 +20,10 @@ class StudentProfileAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('enrollment_date', 'created', 'modified')
+    def full_name(self, obj):
+        return '{} {}'.format(obj.first_name, obj.last_name)
 
+    full_name.short_description = 'Full name'
 
     def get_readonly_fields(self, request, obj=None):
         # Los campos de solo lectura dependen del estado de 'enrollment_status'

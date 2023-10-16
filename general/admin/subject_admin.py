@@ -10,7 +10,10 @@ class SubjectModelAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Subject Information', {
-            'fields': ('code', 'name', 'credits', 'to_hours', 'p_hours', 't_hours', 'status'),
+            'fields': ('code', 'name'),
+        }),
+        ('Other Information', {
+            'fields': ('credits', 'to_hours', 'p_hours', 't_hours', 'is_tutoring', 'status'),
         }),
     )
 
