@@ -9,6 +9,7 @@ class SubjectModel(models.Model):
     to_hours = models.PositiveIntegerField()
     p_hours = models.PositiveIntegerField()
     t_hours = models.PositiveIntegerField()
+    is_tutoring = models.BooleanField(blank=True, default=True, null=True)
     status = models.CharField(max_length=20, choices=(('Active', 'Active'), ('Inactive', 'Inactive') ))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)

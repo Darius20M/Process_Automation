@@ -12,7 +12,6 @@ class PensumSubjectModel(models.Model):
     pensum = models.ForeignKey('general.PensumModel', on_delete=models.PROTECT)
     prerequisites = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
     period = models.IntegerField(default=0, blank=True, null=True)
-    is_tutoring = models.BooleanField(blank=True, default=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)

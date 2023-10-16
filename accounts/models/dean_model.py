@@ -4,7 +4,7 @@ from django.conf import settings
 
 
 class DeanModel(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='account', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     dean_id = models.CharField(max_length=10, unique=True)

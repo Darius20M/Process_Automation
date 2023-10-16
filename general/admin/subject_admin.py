@@ -3,8 +3,8 @@ from general.models import SubjectModel
 
 
 class SubjectModelAdmin(admin.ModelAdmin):
-    list_display = ('code', 'name', 'credits', 'to_hours', 'p_hours', 't_hours', 'status')
-    list_filter = ('status',)
+    list_display = ('code', 'name', 'is_tutoring','credits', 'to_hours', 'p_hours', 't_hours', 'status')
+    list_filter = ('status','is_tutoring')
     search_fields = ('code', 'name')
     list_per_page = 20
 

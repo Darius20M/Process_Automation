@@ -8,6 +8,7 @@ class SubjectSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'code',
+            'is_tutoring',
             'name',
             'credits',
             'to_hours',
