@@ -3,7 +3,7 @@
 from django.utils import timezone
 from django.db import models
 from general.utils.constants import STATUS_CHOICES
-
+#hacer modelo historico general
 
 class SubjectStudentModel(models.Model):
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)

@@ -14,7 +14,7 @@ class ClassroomModel(models.Model):
     modified = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return self.code
+        return '{} {}'.format(self.building, self.code)
     class Meta:
         verbose_name = ('Classroom')
         verbose_name_plural = ('Classrooms')

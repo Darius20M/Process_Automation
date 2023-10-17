@@ -6,7 +6,14 @@ VERIFICATION_STATUS = Choices(
     ('denied', 'Denied'),
     ('accepted', 'Accepted'),
 )
-
+DIAS_SEMANA = (
+        ('Lunes', 'Lunes'),
+        ('Martes', 'Martes'),
+        ('Miércoles', 'Miércoles'),
+        ('Jueves', 'Jueves'),
+        ('Viernes', 'Viernes'),
+        ('Sábado', 'Sábado'),
+    )
 
 REQUEST_STATUS = Choices(
     ('progress', 'Progress'),

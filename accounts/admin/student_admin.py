@@ -5,7 +5,7 @@ from accounts.models import StudentProfileModel, RoleModel
 
 
 class StudentProfileAdmin(admin.ModelAdmin):
-    list_display = ('student_id', 'full_name','date_of_birth', 'email', 'gender', 'enrollment_status')
+    list_display = ('student_id', 'full_name','date_of_birth','career', 'email', 'gender', 'enrollment_status')
     list_filter = ('role', 'enrollment_status', 'gender')
     search_fields = ('student_id', 'first_name', 'last_name', 'email')
     list_per_page = 20

@@ -3,12 +3,13 @@
 from django.utils import timezone
 from django.db import models
 from general.utils.constants import STATUS_CHOICES
+from orders.utils.constants import DIAS_SEMANA
 
 
 class ScheduleClassModel(models.Model):
     _class = models.ForeignKey('catalog.ClassModel', on_delete=models.PROTECT)
     classroom = models.ForeignKey('general.ClassroomModel', on_delete=models.PROTECT)
-    day = models.CharField(max_length=200, null=False, blank=False)
+    day = models.CharField(max_length=200, choices=DIAS_SEMANA, null=False, blank=False)
     h_start = models.DateTimeField(null=False, blank=False)
     h_end = models.DateTimeField(null=False, blank=False)
     description = models.TextField(blank=True, null=True)
