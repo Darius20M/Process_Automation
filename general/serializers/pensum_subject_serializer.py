@@ -7,8 +7,8 @@ from general.serializers.subject_serializer import SubjectSerializer
 class PensumSubjectSerializer(serializers.ModelSerializer):
     subject = SubjectSerializer(many=False, read_only=True)
     subject_id = serializers.IntegerField(required=True, write_only=True)
-    """prerequisites = SubjectSerializer(many=False, read_only=True)
-    prerequisites_id = serializers.IntegerField(required=True, write_only=True)"""
+    prerequisites = SubjectSerializer(many=False, read_only=True)
+    prerequisites_id = serializers.IntegerField(required=True, write_only=True)
     pensum = PensumSerializer(many=False, read_only=True)
     pensum_id = serializers.IntegerField(required=True, write_only=True)
     class Meta:
@@ -20,6 +20,7 @@ class PensumSubjectSerializer(serializers.ModelSerializer):
             'pensum',
             'pensum_id',
             'prerequisites',
+            'prerequisites_id',
             'period',
             'description',
             'status',
