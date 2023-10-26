@@ -20,7 +20,7 @@ class CareerSerializer(serializers.ModelSerializer):
             'pensum_id',
             'pensum',
             'school',
-            'school_id'
+            'school_id',
             'status',
             'created',
             'modified',

@@ -19,11 +19,6 @@ class SubjectStudentSerializer(serializers.ModelSerializer):
             'student_id',
             'subject',
             'subject_id',
-            'teacher',
-            'teacher_id',
-            'period',
-            'period_id',
-            'description',
             'created',
             'modified',
         )

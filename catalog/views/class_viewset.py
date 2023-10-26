@@ -7,7 +7,7 @@ from catalog.serializers import ClassSerializer
 
 class ClassViewSet(ModelViewSet):
     permission_classes = (
-        IsAuthenticated,
+       IsAuthenticated,
     )
     serializer_class = ClassSerializer
     queryset = ClassModel.objects.all()

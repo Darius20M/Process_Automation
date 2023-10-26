@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from accounts.serializers import StudentProfileSerializer
 from catalog.models import CareerStudentModel
+from general.serializers import CareerSerializer
 
 
 class CareerStudentSerializer(serializers.ModelSerializer):

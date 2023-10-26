@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from accounts.serializers import TeacherSerializer, StudentProfileSerializer
 from catalog.models import ClassModel, ScheduleStudentModel
+from catalog.serializers import ScheduleClassSerializer
 from general.serializers import SubjectSerializer, AcademicPeriodSerializer
 
 
