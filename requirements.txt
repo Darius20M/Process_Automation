@@ -15,6 +15,7 @@ django-model-utils==4.3.1
 django-sequences==2.7
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
+drf-flex-fields==1.0.2
 drf-yasg==1.21.7
 Faker==19.3.1
 gunicorn==21.2.0
