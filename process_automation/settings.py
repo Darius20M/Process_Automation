@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 import dj_database_url
+import datetime
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,11 +119,16 @@ DATABASES = {
         "PORT": 5432
     }
 }"""
+USER_SESSION_EXPIRE_TIME = datetime.timedelta(days=3)
+JWT_AUTH_REFRESH_COOKIE = 'tp-refresh-token'
 
 REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'access',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': USER_SESSION_EXPIRE_TIME,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
