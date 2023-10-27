@@ -4,8 +4,9 @@ from django.utils import timezone
 
 class UniversityRuleModel(models.Model):
     min_of_credit_tutoring = models.PositiveIntegerField(default=0)
-    max_of_sub_tutoring = models.PositiveIntegerField(default=0)
-    max_student_become_special = models.PositiveIntegerField(default=0)
+    q_of_subj_tutoring = models.PositiveIntegerField(default=0)
+    max_by_sub_tutoring = models.PositiveIntegerField(default=0)
+    min_student_become_special = models.PositiveIntegerField(default=0)
     min_student_secc = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
