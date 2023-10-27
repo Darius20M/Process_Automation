@@ -12,7 +12,7 @@ class ClassroomViewSet(ModelViewSet):
     )
     serializer_class = ClassroomSerializer
     queryset = ClassroomModel.objects.all()
-    # filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
-    # filterset_fields = ('director_id',)
+    filter_backends = (SearchFilter, OrderingFilter,)
+    filterset_fields = ('code','capacity','building','floor','status')
     # ordering_fields = ('first_name', 'last_name', 'created', 'modified', 'id',)
     # search_fields = ('first_name', 'last_name', 'director_id',)

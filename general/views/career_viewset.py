@@ -11,7 +11,7 @@ class  CareerViewSet(ModelViewSet):
     )
     serializer_class = CareerSerializer
     queryset = CareerModel.objects.all()
-    #filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
-    #filterset_fields = ('director_id',)
+    filter_backends = (SearchFilter, OrderingFilter,)
+    filterset_fields = ('school_id','pensum_id','status',)
     #ordering_fields = ('first_name', 'last_name', 'created', 'modified', 'id',)
     #search_fields = ('first_name', 'last_name', 'director_id',)

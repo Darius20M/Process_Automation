@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import dj_database_url
 import datetime
+from datetime import timedelta
 
 
 
@@ -124,17 +125,19 @@ JWT_AUTH_REFRESH_COOKIE = 'tp-refresh-token'
 
 REST_AUTH = {
     'USE_JWT': True,
+    "JWT_ACCESS_TOKEN_LIFETIME": timedelta(days=3650),  # Un año, por ejemplo
+    'JWT_ALLOW_REFRESH': True,
     'JWT_AUTH_COOKIE': 'access',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh',
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': USER_SESSION_EXPIRE_TIME,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_EXPIRATION_DELTA': timedelta(days=3650),  # Un año
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=3650),  # Un año
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+
 }
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-
     ),
 }
 SOCIALACCOUNT_PROVIDERS = {

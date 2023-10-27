@@ -6,3 +6,4 @@ from .pensum_model import PensumModel
 from .pensum_subject_model import PensumSubjectModel
 from .subjects_model import SubjectModel
 from .school_model import SchoolModel
+from .university_rule_model import UniversityRuleModel
