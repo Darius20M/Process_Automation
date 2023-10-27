@@ -9,6 +9,8 @@ class AcademicPeriodModel(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     description = models.TextField(blank=True, null=True)
+    next_period = models.ForeignKey('general.AcademicPeriodModel', on_delete=models.PROTECT, null=True, blank=True,
+                                      related_name='next_cademic')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)

@@ -7,3 +7,4 @@ from .pensum_admin import PensumModelAdmin
 from .pensum_subject_admin import PensumSubjectModelAdmin
 from .school_admin import SchoolModelAdmin
 from .subject_admin import SubjectModelAdmin
+from .univerity_admin import UniversityRuleModelAdmin

@@ -2,14 +2,14 @@ from django.contrib import admin
 from general.models import AcademicPeriodModel
 
 class AcademicPeriodModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'start_date', 'end_date', 'status', 'created', 'modified')
+    list_display = ('name', 'start_date', 'end_date','next_period' ,'status', 'created', 'modified')
     list_filter = ('status', 'start_date')
     search_fields = ('name', 'description')
     list_per_page = 20
 
     fieldsets = (
         ('Academic Period Information', {
-            'fields': ('name', 'start_date', 'end_date', 'description', 'status'),
+            'fields': ('name', 'start_date', 'end_date', 'description', 'next_period', 'status'),
         }),
         ('Timestamps', {
             'fields': ('created', 'modified'),
