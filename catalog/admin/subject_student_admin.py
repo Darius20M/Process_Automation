@@ -17,6 +17,17 @@ class SubjectStudentModelAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('created', 'modified')
+    ordering = ('subject__code', 'subject__name',)
+    def make_status_active(self, request, queryset):
+        queryset.update(status='approved')
+
+    def make_status_inactive(self, request, queryset):
+        queryset.update(status='due')
+
+    make_status_active.short_description = "approved subject"
+    make_status_inactive.short_description = "due subject"
+
+    actions = [make_status_active, make_status_inactive]
 
 
 admin.site.register(SubjectStudentModel, SubjectStudentModelAdmin)

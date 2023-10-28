@@ -134,6 +134,11 @@ REST_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 
 }
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': USER_SESSION_EXPIRE_TIME,
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',

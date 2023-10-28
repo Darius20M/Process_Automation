@@ -3,8 +3,8 @@ from general.models import PensumSubjectModel
 
 class PensumSubjectModelAdmin(admin.ModelAdmin):
     list_display = ('subject', 'pensum', 'prerequisites', 'period', 'status', 'created', 'modified')
-    list_filter = ('status',)
-    search_fields = ('subject__name', 'pensum__name', 'description')
+    list_filter = ('status', 'subject__code', )
+    search_fields = ('subject__name', 'subject__code', 'pensum__name', 'description')
     list_per_page = 20
 
     fieldsets = (
@@ -17,5 +17,5 @@ class PensumSubjectModelAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('created', 'modified')
-
+    ordering = ('period','subject__name','prerequisites',)
 admin.site.register(PensumSubjectModel, PensumSubjectModelAdmin)
