@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
+from rest_framework.exceptions import APIException
 
 from accounts.models import StudentProfileModel
 from general.models import SubjectModel, AcademicPeriodModel
@@ -12,28 +13,28 @@ from orders.serializers import GenerateRequestTutoringSerializer, RequestTutorin
 
 class GenerateRequestTutoringViewSet(APIView):
     permission_classes = (
-        IsAuthenticated,
+        # IsAuthenticated,
     )
 
     def _get_subject(self, subject_id) -> SubjectModel:
         try:
             subject = SubjectModel.objects.get(id=subject_id)
         except SubjectModel.DoesNotExist:
-            raise ValueError("This subject does not exist")
+            raise APIException(detail="This subject does not exist", code=status.HTTP_400_BAD_REQUEST)
         return subject
 
     def _get_period(self, period_id) -> AcademicPeriodModel:
         try:
             period = AcademicPeriodModel.objects.get(id=period_id)
         except AcademicPeriodModel.DoesNotExist:
-            raise ValueError("This period does not exist")
+            raise APIException(detail="This period does not exist", code=status.HTTP_400_BAD_REQUEST)
         return period
 
     def _get_student(self, user) -> StudentProfileModel:
         try:
             student = StudentProfileModel.objects.get(user=user)
         except StudentProfileModel.DoesNotExist:
-            raise ValueError("This student does not exist")
+            raise APIException(detail="This student does not exist", code=status.HTTP_400_BAD_REQUEST)
         return student
 
     def post(self, request, pk=None, format=None):
@@ -49,7 +50,7 @@ class GenerateRequestTutoringViewSet(APIView):
                 subject=subject,
                 shift=shift,
                 student=student,
-                period = period,
+                period=period,
                 user=request.user
             )
 

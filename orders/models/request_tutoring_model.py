@@ -12,6 +12,7 @@ class RequesttutoringModel(models.Model):
     career = models.ForeignKey('general.CareerModel', on_delete=models.PROTECT)
     period = models.ForeignKey('general.AcademicPeriodModel', on_delete=models.PROTECT)
     request_number = models.CharField(max_length=180, unique=True)
+    is_special_course = models.BooleanField(default=False)
     reason=models.TextField(null=True, blank=True)
     status = models.CharField(max_length=30, choices=VERIFICATION_STATUS, default=VERIFICATION_STATUS.pending,
                               null=False, blank=False)
