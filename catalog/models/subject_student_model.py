@@ -6,8 +6,8 @@ from general.utils.constants import STATUS_CHOICES
 #hacer modelo historico general
 
 class SubjectStudentModel(models.Model):
-    subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)
-    student = models.ForeignKey('accounts.StudentProfileModel', on_delete=models.PROTECT)
+    subject = models.ForeignKey('general.SubjectModel', related_name='subject_student', on_delete=models.CASCADE)
+    student = models.ForeignKey('accounts.StudentProfileModel', related_name='subject_student', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='due')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)

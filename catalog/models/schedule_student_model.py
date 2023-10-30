@@ -6,7 +6,7 @@ from general.utils.constants import STATUS_CHOICES
 
 class ScheduleStudentModel(models.Model):
     student = models.ForeignKey('accounts.StudentProfileModel', on_delete=models.PROTECT)
-    schedule = models.ForeignKey('catalog.ScheduleClassModel', on_delete=models.PROTECT)
+    schedule = models.ForeignKey('catalog.ScheduleClassModel', on_delete=models.PROTECT, null= True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)

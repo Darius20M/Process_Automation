@@ -1,56 +1,80 @@
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from rest_framework.exceptions import APIException
+from rest_framework import status
 
-from general.models import SubjectModel
+from accounts.models import StudentProfileModel
+from catalog.models import SubjectStudentModel
+from general.models import SubjectModel, AcademicPeriodModel, UniversityRuleModel
+from orders.handlers.is_subject_available_handler import is_subject_available_handler
 from orders.models import RequesttutoringModel
+from orders.utils.constants import VERIFICATION_STATUS
+from security.handlers import create_activity_handler, create_notification_handler
 
 
 def generate_request_tutoring_handler(
-        subject:SubjectModel) -> RequesttutoringModel:
+        subject: SubjectModel,
+        shift,
+        period: AcademicPeriodModel,
+        student: StudentProfileModel,
+        user
+) -> RequesttutoringModel:
 
-    """if RequestInvitationModel.objects.filter(practice=practice, email=email, status=INVITATION_STATUS.pending).exists():
-        raise RequestInvitationPendingException()
-    if RequestInvitationModel.objects.filter(practice=practice, email=email, status=INVITATION_STATUS.accepted).exsits():
-        raise RequestInvitationAcceptedException()"""
+    if is_subject_available_handler(subject, user):
+        raise APIException(detail="You haven't taken this subject's prerequisite yet", code=status.HTTP_400_BAD_REQUEST)
+    # para el minimode materia que tiene que tener
+    if SubjectStudentModel.objects.filter(student__user=user,status='due').count() > UniversityRuleModel.objects.get(
+            id=1).q_of_subj_tutoring:
+        raise APIException(detail="You haven't completed the min of subjects to take tutoring", code=status.HTTP_400_BAD_REQUEST)
 
+    # para el max de materia que tiene aprovada en tutoria
+    if RequesttutoringModel.objects.filter(user=user, period=period,
+                                           status=VERIFICATION_STATUS.accepted).count() >= UniversityRuleModel.objects.get(
+        id=1).max_by_sub_tutoring:
+        raise APIException(detail="You already have the max of tutoring accepted by period", code=status.HTTP_400_BAD_REQUEST)
 
+    # para el max de materia que tiene pend8iente en tutoria
+    if RequesttutoringModel.objects.filter(user=user, period=period,
+                                           status=VERIFICATION_STATUS.pending).count() >= UniversityRuleModel.objects.get(
+        id=1).max_by_sub_tutoring:
+        raise APIException(detail="You already have the max of tutoring pending by period", code=status.HTTP_400_BAD_REQUEST)
 
-    """request_tutoring = RequesttutoringModel.objects.create(
-        practice=practice,
-        email=email,
-        role=role,
-        first_name=first_name,
-        last_name=last_name,
-        npi=npi,
-        ipa_member_id=ipa_member_id,
-        requesting_user=requesting_user,
+    # para saber si tiene aprovada tutoria
+    if RequesttutoringModel.objects.filter(user=user, period=period, subject=subject,
+                                           status=VERIFICATION_STATUS.accepted).exists():
+        raise APIException(detail="This subject was accepted", code=status.HTTP_400_BAD_REQUEST)
+
+    # para saber si tiene pendiente tutoria
+    if RequesttutoringModel.objects.filter(user=user, period=period, subject=subject,
+                                           status=VERIFICATION_STATUS.pending).exists():
+        raise APIException(detail="You already have this subject pending acceptance", code=status.HTTP_400_BAD_REQUEST)
+
+    request_tutoring = RequesttutoringModel.objects.create(
+        subject=subject,
         user=user,
-        status=INVITATION_STATUS.pending
-    )
-    # create active requesting user
-    create_activity_handler(
-        application=application,
-        user=requesting_user,
-        level='INFO',
-        activity_text='REQUEST_INVITATION_MEMBER'
+        career=student.career,
+        period=period
     )
 
-    message_text = 'You have sent an invitation request to the {} email to join the {} practice'.format(email, practice.name)
+    request = RequesttutoringModel.objects.filter(period=period, subject=subject, status='pending')
+    if request.count() >= UniversityRuleModel.objects.get(
+            id=1).min_student_become_special:
+        request.update(is_special_course = True)
+
+
+    create_activity_handler(
+        user=user,
+        level='INFO',
+        activity_text='TUTORING_REQUEST'
+    )
+
+    message_text = 'You have sent a request for tutoring for the subject {}'.format(subject.name)
 
     create_notification_handler(
-        user=requesting_user,
-        title=_('Invitation request sent'),
+        user=user,
+        title=_('tutoring request sent'),
         message=message_text,
         level='INFO'
     )
 
-    if user is not None:
-        message_user = 'You have received an invitation request to join the {} practice.'.format(practice.name)
-        create_notification_handler(
-            user=requesting_user,
-            title=_('Invitation request'),
-            message=message_user,
-            level='INFO'
-        )
-"""
-    return 0
+    return request_tutoring

@@ -9,7 +9,7 @@ from general.utils.constants import STATUS_CHOICES
 
 class PensumSubjectModel(models.Model):
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT, related_name='pensum_subjects')
-    pensum = models.ForeignKey('general.PensumModel', on_delete=models.PROTECT)
+    pensum = models.ForeignKey('general.PensumModel', related_name='pensums',on_delete=models.PROTECT)
     prerequisites = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT, null=True, blank=True,
                                       related_name='pensum_subjects_prerequisites')
     period = models.IntegerField(default=0, blank=True, null=True)

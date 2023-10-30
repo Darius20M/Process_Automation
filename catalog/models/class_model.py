@@ -4,12 +4,13 @@ from general.utils.constants import STATUS_CHOICES
 
 
 class ClassModel(models.Model):
+    student = models.ForeignKey('accounts.StudentProfileModel', on_delete=models.PROTECT)
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)
-    teacher = models.ForeignKey('accounts.TeacherModel', on_delete=models.PROTECT)
+    teacher = models.ForeignKey('accounts.TeacherModel', on_delete=models.PROTECT, null=True)
     period = models.ForeignKey('general.AcademicPeriodModel', on_delete=models.PROTECT)
     secc = models.CharField(max_length=10, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='due')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
 

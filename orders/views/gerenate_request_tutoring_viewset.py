@@ -7,7 +7,7 @@ from rest_framework.exceptions import APIException
 
 from accounts.models import StudentProfileModel
 from general.models import SubjectModel, AcademicPeriodModel
-from orders.handlers import generate_request_tutoring_handler
+from orders.handlers import generate_request_tutoring_handler, send_email_handler
 from orders.serializers import GenerateRequestTutoringSerializer, RequestTutoringSerializer
 
 
@@ -53,7 +53,7 @@ class GenerateRequestTutoringViewSet(APIView):
                 period=period,
                 user=request.user
             )
-
+            send_email_handler(request_verify, 'confirmation')
             return Response(RequestTutoringSerializer(instance=request_verify, many=False).data,
                             status=status.HTTP_200_OK)
         else:

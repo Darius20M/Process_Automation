@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Solicitud de Tutoría - Universidad Católica Santo Domingo</title>
+</head>
+    <style>
+        .info {
+                    background-color: #f0f0f0;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+    </style>
+
+<body>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <table align="center" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px;">
+                    <tr>
+                        <td align="center" bgcolor="#4CAF50" style="padding: 20px 0; color: #ffffff; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;">
+                            Universidad Católica Santo Domingo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#E8F5E9" style="padding: 40px 0;">
+                            <h2>Confirmación de Solicitud de Tutoría</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#ffffff" style="padding: 30px; font-family: Arial, sans-serif;">
+                            <p>Hola {{ inf.user.first_name }},</p>
+                            <p>Tu número de solicitud es: <strong>{{ inf.request_number }}</strong></p>
+                            <p>El estado de tu solicitud es: <strong>{{ inf.status }}</strong></p>
+                            <p>Fecha de creación: {{ inf.created }}</p>
+                            <p>Comentario: {{ inf.comment }}</p>
+                            <div class="info">
+                                <h2>Información de la Materia</h2>
+                                <p>Nombre de la materia: {{ inf.subject.name }}</p>
+                                <p>Código de la materia: {{ inf.subject.code }}</p>
+                            </div>
+                            <p>Gracias por utilizar nuestro servicio de tutoría en la Universidad Católica Santo Domingo (UCSD). Estamos encantados de ayudarte en tu proceso de aprendizaje.</p>
+                            <p>No dudes en contactarnos si tienes alguna pregunta o necesitas asistencia adicional.</p>
+                            <p>Atentamente,<br>El equipo de tutoría</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#4CAF50" style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+                            <p style="color: #ffffff;">Universidad Católica Santo Domingo &copy; 2023</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

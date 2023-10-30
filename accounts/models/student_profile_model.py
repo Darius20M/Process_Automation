@@ -4,7 +4,7 @@ from django.conf import settings
 
 
 class StudentProfileModel(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='student', on_delete=models.PROTECT)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='student', on_delete=models.PROTECT)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     student_id = models.CharField(max_length=9, unique=True)

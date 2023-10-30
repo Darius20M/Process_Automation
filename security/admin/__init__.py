@@ -1,0 +1,3 @@
+
+from .notification_admin import NotificationModelAdmin
+from .activity_admin import ActivityModelAdmin

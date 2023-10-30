@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Notificación de Creación de Usuario - Universidad Católica Santo Domingo</title>
+</head>
+<body>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <table align="center" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px;">
+                    <tr>
+                        <td align="center" bgcolor="#4CAF50" style="padding: 20px 0; color: #ffffff; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;">
+                            Universidad Católica Santo Domingo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#E8F5E9" style="padding: 40px 0;">
+                            <h2>Notificación de Creación de Usuario</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#ffffff" style="padding: 30px; font-family: Arial, sans-serif;">
+                            <p>Estimado {{ inf.user.first_name }},</p>
+                            <p>Le informamos que su cuenta de usuario en la Universidad Católica Santo Domingo ha sido creada exitosamente.</p>
+                            <p>A continuación, se detallan sus credenciales de inicio de sesión:</p>
+                            <ul>
+                                <li><strong>Nombre de Usuario:</strong> {{ inf.user.username }}</li>
+                                <li><strong>Contraseña:</strong> {{ inf.user.username }}</li>
+                            </ul>
+                            <p>Por favor, asegúrese de cambiar su contraseña temporal en su primer inicio de sesión para garantizar la seguridad de su cuenta.</p>
+                            <p>Si tiene alguna pregunta o necesita asistencia, no dude en ponerse en contacto con nuestro equipo de soporte.</p>
+                            <p>¡Le damos la bienvenida a la comunidad de la Universidad Católica Santo Domingo!</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#4CAF50" style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+                            <p style="color: #ffffff;">Universidad Católica Santo Domingo &copy; 2023</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
