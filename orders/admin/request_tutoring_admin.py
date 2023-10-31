@@ -1,13 +1,19 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from rest_framework.exceptions import APIException
 
+from accounts.models import StudentProfileModel
 from catalog.models import ClassModel, SubjectStudentModel
-from orders.handlers import send_email_handler
+from general.models import UniversityRuleModel, SubjectModel
+from orders.handlers import send_email_handler, is_subject_available_handler
 from orders.models import RequesttutoringModel
 from django.utils import timezone
+from rest_framework import status
 
 from sequences import get_next_value
 
+from orders.utils.constants import VERIFICATION_STATUS
 from security.handlers import create_activity_handler, create_notification_handler
+
 
 
 class RequesttutoringModelAdmin(admin.ModelAdmin):
@@ -16,10 +22,10 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
     search_fields = ('request_number', 'user__username', 'user__first_name', 'user__last_name', 'user__email')
     list_per_page = 20
     list_editable = ('comment', 'status')
-
+    readonly_fields = ('request_number',)
     fieldsets = (
         ('Request Information', {
-            'fields': ('subject', 'user', 'career', 'request_number', 'status', 'user_verified', 'comment'),
+            'fields': ('subject', 'user', 'career', 'request_number', 'period','status', 'user_verified', 'comment'),
         }),
 
     )
@@ -92,13 +98,63 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
     actions = [mark_as_Approve, mark_as_Deny]
 
     def save_model(self, request, obj, form, change):
-        if not obj.id:
-            obj.request_number = "RT{0}".format(get_next_value("request_tutoring", initial_value=1000))
-        obj.modified = timezone.now()
-        super().save_model(request, obj, form, change)
+        has_error = False
+
+        if not obj.subject.is_tutoring:
+            messages.error(request, 'Esta materia no esta disponible para tutorias.')
+            has_error = True
+
+        if not SubjectStudentModel.objects.filter(student__user=obj.user,subject=obj.subject,status='due'):
+            messages.error(request, 'Esta materia ya ha sido aprovada por el estudiante.')
+            has_error = True
+
+        if is_subject_available_handler(obj.subject, obj.user):
+            messages.error(request, 'Aun no ha tomado el prerequisito este estudiante.')
+            has_error = True
+
+        # para el minimode materia que tiene que tener
+        if SubjectStudentModel.objects.filter(student__user=obj.user,
+                                              status='due').count() > UniversityRuleModel.objects.get(
+                id=1).q_of_subj_tutoring:
+            messages.error(request, 'Aun no ha tomado el minimo de materias este estudiante.')
+            has_error = True
+
+
+        # para el max de materia que tiene aprovada en tutoria
+        if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period,
+                                               status=VERIFICATION_STATUS.accepted).count() >= UniversityRuleModel.objects.get(
+            id=1).max_by_sub_tutoring:
+
+            messages.error(request, 'Ya ha tomado el maximo de materias por periodo este estudiante.')
+            has_error = True
+
+
+        # para el max de materia que tiene pend8iente en tutoria
+        if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period,
+                                               status=VERIFICATION_STATUS.pending).count() >= UniversityRuleModel.objects.get(
+            id=1).max_by_sub_tutoring:
+            messages.error(request, 'Ya ha tomado el maximo de materias pendiente por periodo este estudiante.')
+            has_error = True
+
+
+        # para saber si tiene aprovada tutoria
+        if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period, subject=obj.subject,
+                                               status=VERIFICATION_STATUS.accepted).exists():
+            messages.error(request, 'Ya esta materia fue aprovada para este estudiante.')
+            has_error = True
+
+
+        # para saber si tiene pendiente tutoria
+        if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period, subject=obj.subject, status=VERIFICATION_STATUS.pending).exists():
+            messages.error(request, 'Ya esta materia fue solicitada y esta en proceso de aprovacion para este estudiante.')
+            has_error = True
+
+        if has_error:
+            messages.set_level(request, messages.ERROR)
+        else:
+            super().save_model(request, obj, form, change)
 
     def get_readonly_fields(self, request, obj=None):
-        # Retorna una lista de campos de solo lectura cuando se está editando un registro existente
         if obj:
             return ['request_number', 'subject', 'user', 'career', 'created', 'modified']
 
@@ -106,10 +162,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        if obj is None:
-            # Cuando se está creando un nuevo registro, se permiten todas las opciones de usuarios.
-            return form
-        # Cuando se está editando un registro existente, limitamos las opciones de user_verified al usuario actual.
+
         form.base_fields['user_verified'].queryset = form.base_fields['user_verified'].queryset.filter(
             pk=request.user.pk)
         return form

@@ -4,7 +4,6 @@ from django.conf import settings
 
 
 class DirectorModel(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     director_id = models.CharField(max_length=10, unique=True)

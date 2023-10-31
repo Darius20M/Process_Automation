@@ -9,14 +9,11 @@ from accounts.models import DeanModel
 class DeanSerializer(serializers.ModelSerializer):
     role = RoleSerializer(many=False, read_only=True)
     role_id = serializers.IntegerField(required=True, write_only=True)
-    user = UserListSerializer()
-    user_id = serializers.IntegerField()
+
     class Meta:
         model = DeanModel
         fields = (
             'id',
-            'user',
-            'user_id',
             'first_name',
             'last_name',
             'dean_id',

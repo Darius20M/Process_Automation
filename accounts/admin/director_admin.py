@@ -13,7 +13,7 @@ class DirectorModelAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Personal Information', {
             'fields': (
-                'first_name', 'last_name', 'user', 'director_id', 'date_of_birth', 'gender', 'address', 'contact_phone',
+                'first_name', 'last_name',  'director_id', 'date_of_birth', 'gender', 'address', 'contact_phone',
                 'email', 'identification_number'),
         }),
         ('Enrollment Information', {

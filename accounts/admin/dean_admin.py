@@ -9,7 +9,7 @@ class DeanModelAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Personal Information', {
-            'fields': ('first_name', 'last_name','user','date_of_birth', 'gender', 'address', 'contact_phone', 'email', 'identification_number'),
+            'fields': ('first_name', 'last_name','date_of_birth', 'gender', 'address', 'contact_phone', 'email', 'identification_number'),
         }),
         ('Enrollment Information', {
             'fields': ('role', 'enrollment_date', 'enrollment_status'),
