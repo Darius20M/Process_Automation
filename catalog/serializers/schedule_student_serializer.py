@@ -21,7 +21,6 @@ class ScheduleStudentSerializer(serializers.ModelSerializer):
             'student_id',
             'schedule_class',
             'schedule_class_id',
-            'description',
             'created',
             'modified',
         )

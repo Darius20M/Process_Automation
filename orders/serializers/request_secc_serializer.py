@@ -19,7 +19,6 @@ class RequestSecSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'request_number',
-            'reason',
             'subject',
             'subject_id',
             'user',
