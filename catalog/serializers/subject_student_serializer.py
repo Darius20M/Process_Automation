@@ -8,7 +8,7 @@ from general.serializers import SubjectSerializer, AcademicPeriodSerializer
 
 
 class SubjectStudentSerializer(FlexFieldsModelSerializer):
-    student = StudentProfileSerializer(many=False, read_only=True)
+    #student = StudentProfileSerializer(many=False, read_only=True)
     student_id = serializers.IntegerField(required=True, write_only=True)
     subject = SubjectSerializer(many=False, read_only=True)
     subject_id = serializers.IntegerField(required=True, write_only=True)
@@ -20,6 +20,7 @@ class SubjectStudentSerializer(FlexFieldsModelSerializer):
             'student_id',
             'subject',
             'subject_id',
+            'status',
             'created',
             'modified',
         )

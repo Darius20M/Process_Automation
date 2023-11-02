@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
@@ -11,7 +12,7 @@ class  AcademicPeriodViewSet(ModelViewSet):
     )
     serializer_class = AcademicPeriodSerializer
     queryset = AcademicPeriodModel.objects.all()
-    filter_backends = (SearchFilter, OrderingFilter,)
-    filterset_fields = ('status',)
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
+    filterset_fields = ('status')
     #ordering_fields = ('first_name', 'last_name', 'created', 'modified', 'id',)
     #search_fields = ('first_name', 'last_name', 'director_id',)
