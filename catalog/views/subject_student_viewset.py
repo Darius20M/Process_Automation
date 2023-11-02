@@ -9,9 +9,9 @@ from catalog.serializers.subject_student_serializer import SubjectStudentSeriali
 
 
 class SubjectStudentViewSet(ModelViewSet):
-    """permission_classes = (
+    permission_classes = (
         IsAuthenticated,
-    )"""
+    )
     serializer_class = SubjectStudentSerializer
     queryset = SubjectStudentModel.objects.all()
     filter_backends = (StudentFilter,DjangoFilterBackend, SearchFilter, OrderingFilter,)

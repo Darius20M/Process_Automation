@@ -14,7 +14,6 @@ class DirectorSerializer(serializers.ModelSerializer):
         model = DirectorModel
         fields = (
             'id',
-
             'first_name',
             'last_name',
             'director_id',

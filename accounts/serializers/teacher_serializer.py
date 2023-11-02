@@ -17,7 +17,6 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = TeacherModel
         fields = (
             'id',
-
             'first_name',
             'last_name',
             'teacher_id',
