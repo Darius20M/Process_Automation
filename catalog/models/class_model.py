@@ -13,7 +13,8 @@ class ClassModel(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='due')
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
-
+    def __str__(self):
+        return self.subject.name
     class Meta:
         verbose_name = ('Class')
         verbose_name_plural = ('Classes')

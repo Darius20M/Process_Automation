@@ -1,3 +1,5 @@
+import random
+
 from rest_framework import serializers
 
 from accounts.serializers.user_list_serializer import UserListSerializer
@@ -8,6 +10,8 @@ from general.serializers import CareerSerializer
 
 
 class StudentProfileSerializer(serializers.ModelSerializer):
+    last_score = serializers.SerializerMethodField()
+    total_score = serializers.SerializerMethodField()
     role = RoleSerializer(many=False, read_only=True)
     role_id = serializers.IntegerField(required=True, write_only=True)
     user = UserListSerializer(many=False, read_only=True)
@@ -24,6 +28,8 @@ class StudentProfileSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'student_id',
+            'last_score',
+            'total_score',
             'identification_number',
             'enrollment_date',
             'enrollment_status',
@@ -40,7 +46,12 @@ class StudentProfileSerializer(serializers.ModelSerializer):
             'modified',
         )
         read_only_fields = ('id', 'student_id','identification_number', 'created', 'modified',)
-#poner un array de la carrera student y karla va mostar la activa
-#poner un hisotiral model y en un campo virtual el indice
+
+    def get_last_score(self, obj):
+            return round(random.uniform(3, 4),2)
+
+    def get_total_score(self, obj):
+            return round(random.uniform(3, 4),2)
+
 
 
