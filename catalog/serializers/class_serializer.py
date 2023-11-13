@@ -12,13 +12,16 @@ class ClassSerializer(serializers.ModelSerializer):
     teacher_id = serializers.IntegerField()
     period = AcademicPeriodSerializer(many=False, read_only=True)
     period_id = serializers.IntegerField()
-
+    # student = StudentProfileSerializer(many=False, read_only=True)
+    student_id = serializers.IntegerField(required=True, write_only=True)
     class Meta:
         model = ClassModel
         fields = (
             'id',
             'subject',
             'subject_id',
+            'student',
+            'student_id',
             'teacher',
             'teacher_id',
             'period',
