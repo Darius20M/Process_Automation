@@ -17,7 +17,7 @@ class StudentProfileModel(models.Model):
     email = models.EmailField(unique=True)
     identification_number = models.CharField(max_length=20, unique=True)
     enrollment_date = models.DateTimeField(default=timezone.now, editable=False)
-    enrollment_status = models.CharField(max_length=20, default='N/A', choices=(('Enrolled', 'Enrolled'), ('Graduated', 'Graduated')))
+    enrollment_status = models.CharField(max_length=20, default='N/A', choices=(('Enrolled', 'Enrolled'), ('Inactive', 'Inactive'), ('Graduated', 'Graduated')))
     created = models.DateTimeField(default=timezone.now, editable=False)
     modified = models.DateTimeField(default=timezone.now, editable=False)
 

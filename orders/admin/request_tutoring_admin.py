@@ -168,6 +168,9 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
         else:
             has_error = False
 
+            if StudentProfileModel.objects.get(user=obj.user).enrollment_status != 'Enrolled':
+                messages.error(request, 'No puedes realizar este proceso debido a que el estudiante no esta activo')
+
             if not obj.subject.is_tutoring:
                 messages.error(request, 'Esta materia no esta disponible para tutorias.')
                 has_error = True
