@@ -13,7 +13,7 @@ class ScheduleClassInline(admin.TabularInline):
 class ClassModelAdmin(admin.ModelAdmin):
     inlines = (ScheduleClassInline,)
 
-    list_display = ('subject', 'student', 'teacher', 'period', 'secc', 'description', 'status', 'created', 'modified')
+    list_display = ('subject', 'student','is_tutoring_now', 'teacher', 'period', 'secc', 'description', 'status', 'created', 'modified')
     list_filter = ('status','subject','period__name')
     search_fields = ('subject__name', 'teacher__first_name', 'teacher__last_name', 'secc', 'description')
     list_per_page = 20
@@ -21,7 +21,7 @@ class ClassModelAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Class Information', {
-            'fields': ('subject', 'student', 'teacher', 'period', 'secc', 'description', 'status'),
+            'fields': ('subject','is_tutoring_now', 'student', 'teacher', 'period', 'secc', 'description', 'status'),
         }),
         ('Timestamps', {
             'fields': ('created', 'modified'),

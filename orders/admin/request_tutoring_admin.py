@@ -175,6 +175,10 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 messages.error(request, 'Esta materia no esta disponible para tutorias.')
                 has_error = True
 
+            if  SubjectStudentModel.objects.filter(student__user=obj.user,subject=obj.subject,status='ongoing'):
+                messages.error(request, 'Esta materia ya esta siendo cursada por el estudiante.')
+                has_error = True
+
             if not SubjectStudentModel.objects.filter(student__user=obj.user,subject=obj.subject,status='due'):
                 messages.error(request, 'Esta materia ya ha sido aprovada por el estudiante.')
                 has_error = True

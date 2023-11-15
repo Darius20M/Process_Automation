@@ -9,7 +9,7 @@ class ClassSerializer(serializers.ModelSerializer):
     subject = SubjectSerializer(many=False, read_only=True)
     subject_id = serializers.IntegerField(required=True, write_only=True)
     teacher = TeacherSerializer(many=False, read_only=True)
-    teacher_id = serializers.IntegerField()
+    teacher_id = serializers.IntegerField(required=True, write_only=True)
     period = AcademicPeriodSerializer(many=False, read_only=True)
     period_id = serializers.IntegerField()
     # student = StudentProfileSerializer(many=False, read_only=True)
@@ -26,6 +26,7 @@ class ClassSerializer(serializers.ModelSerializer):
             'teacher_id',
             'period',
             'period_id',
+            'is_tutoring_now',
             'description',
             'created',
             'modified',

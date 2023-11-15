@@ -8,6 +8,7 @@ class ClassModel(models.Model):
     subject = models.ForeignKey('general.SubjectModel', on_delete=models.PROTECT)
     teacher = models.ForeignKey('accounts.TeacherModel', on_delete=models.PROTECT, null=True)
     period = models.ForeignKey('general.AcademicPeriodModel', on_delete=models.PROTECT)
+    is_tutoring_now = models.BooleanField(blank=True, default=False, null=False)
     secc = models.CharField(max_length=10, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='due')
