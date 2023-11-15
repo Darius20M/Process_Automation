@@ -15,4 +15,6 @@ class ClassViewSet(ModelViewSet):
     serializer_class = ClassSerializer
     queryset = ClassModel.objects.all()
     filter_backends = (StudentFilter,DjangoFilterBackend, SearchFilter, OrderingFilter,)
+    filterset_fields = ('student_id', 'subject_id', 'subject__is_tutoring','is_tutoring_now', 'status')
+
 
