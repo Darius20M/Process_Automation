@@ -114,6 +114,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 student = obj.user.student
 
                 ClassModel.objects.create(
+                    is_tutoring_now = True,
                     student=student,
                     subject=obj.subject,
                     period=obj.period

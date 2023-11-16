@@ -3,7 +3,6 @@ from general.models import AcademicPeriodModel
 
 
 class AcademicPeriodSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = AcademicPeriodModel
         fields = (
@@ -11,6 +10,7 @@ class AcademicPeriodSerializer(serializers.ModelSerializer):
             'name',
             'start_date',
             'end_date',
+            'next_period',
             'status',
             'created',
             'modified',

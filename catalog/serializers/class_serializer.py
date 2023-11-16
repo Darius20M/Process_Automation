@@ -33,4 +33,13 @@ class ClassSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id', 'created', 'modified',)
 
+    def to_representation(self, instance):
+        from catalog.serializers.schedule_class_serializer import ScheduleClassSerializer
+
+        # Asegúrate de utilizar el nombre relacionado correcto
+        schedule_instances = instance.schedule.all()  # Usa el nombre relacionado, por ejemplo, 'schedule'
+        representation = super().to_representation(instance)
+        representation['schedule'] = ScheduleClassSerializer(schedule_instances, many=True).data
+        return representation
+
 

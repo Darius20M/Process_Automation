@@ -20,6 +20,9 @@ def generate_request_tutoring_handler(
         user
 ) -> RequesttutoringModel:
 
+    if StudentProfileModel.objects.get(user=user).enrollment_status != 'Enrolled':
+        raise APIException(detail="No estas activo para realizar tutorias", code=status.HTTP_400_BAD_REQUEST)
+
     if is_subject_available_handler(subject, user):
         raise APIException(detail="You haven't taken this subject's prerequisite yet", code=status.HTTP_400_BAD_REQUEST)
     # para el minimode materia que tiene que tener

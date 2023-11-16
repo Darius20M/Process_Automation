@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from django.db import models  # Agrega esta importación
-from catalog.models import ClassModel, ScheduleClassModel, ScheduleStudentModel
+from catalog.models import ClassModel, ScheduleClassModel, ScheduleStudentModel, SubjectStudentModel
 
 
 class ScheduleClassInline(admin.TabularInline):
@@ -29,6 +29,12 @@ class ClassModelAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('created', 'modified')
+
+    def save_model(self, request, obj, form, change):
+        subject_student = SubjectStudentModel.objects.get(student=obj.student, subject=obj.subject)
+        subject_student.status = 'ongoing'
+        subject_student.save()
+        obj.save()
 
 
 admin.site.register(ClassModel, ClassModelAdmin)

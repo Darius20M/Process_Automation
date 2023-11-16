@@ -7,7 +7,7 @@ from orders.utils.constants import DIAS_SEMANA
 
 
 class ScheduleClassModel(models.Model):
-    _class = models.ForeignKey('catalog.ClassModel', on_delete=models.PROTECT)
+    _class = models.ForeignKey('catalog.ClassModel', related_name='schedule',on_delete=models.PROTECT)
     classroom = models.ForeignKey('general.ClassroomModel', on_delete=models.PROTECT)
     day = models.CharField(max_length=200, choices=DIAS_SEMANA, null=False, blank=False)
     h_start = models.TimeField(null=False, blank=False)
