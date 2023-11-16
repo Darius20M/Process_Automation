@@ -42,13 +42,12 @@ class GenerateRequestTutoringViewSet(APIView):
         if serializer.is_valid():
 
             subject = self._get_subject(subject_id=serializer.validated_data.get('subject_id'))
-            shift = serializer.validated_data.get('shift')
             period = self._get_period(period_id=serializer.validated_data.get('period_id'))
             student = self._get_student(user=request.user)
 
             request_verify = generate_request_tutoring_handler(
                 subject=subject,
-                shift=shift,
+                shift='night',
                 student=student,
                 period=period,
                 user=request.user
