@@ -19,7 +19,7 @@ from security.handlers import create_activity_handler, create_notification_handl
 
 class RequesttutoringModelAdmin(admin.ModelAdmin):
     list_display = ('request_number', 'subject', 'period', 'user', 'career', 'status', 'user_verified','is_special_course','comment')
-    list_filter = ('status', 'subject', 'career')
+    list_filter = ('status', 'subject', 'user','period','career')
     search_fields = ('request_number', 'user__username', 'user__first_name', 'user__last_name', 'user__email')
     list_per_page = 20
     list_editable = ('comment', 'status')

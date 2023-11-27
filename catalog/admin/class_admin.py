@@ -14,7 +14,7 @@ class ClassModelAdmin(admin.ModelAdmin):
     inlines = (ScheduleClassInline,)
 
     list_display = ('subject', 'student','is_tutoring_now', 'teacher', 'period', 'secc', 'description', 'status', 'created', 'modified')
-    list_filter = ('status','subject','period__name')
+    list_filter = ('status','subject','period','student__student_id')
     search_fields = ('subject__name', 'teacher__first_name', 'teacher__last_name', 'secc', 'description')
     list_per_page = 20
     list_editable = ('status',)
