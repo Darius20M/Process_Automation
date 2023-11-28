@@ -49,7 +49,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 subject_student.status = 'ongoing'
                 subject_student.save()
 
-                default_comment = 'Your application was accepted for the subject {}'.format(item.subject.name)
+                default_comment = 'Tu solicitud fue aceptada para la materia: {}'.format(item.subject.name)
 
                 item.comment = default_comment
                 item.save()
@@ -79,7 +79,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 item.status = 'denied'
                 item.user_verified = request.user
 
-                default_comment = 'Tu aplicacion fue negada para la asignatura {}'.format(item.subject.name)
+                default_comment = 'Tu solicitud fue negada para la asignatura {}'.format(item.subject.name)
                 item.comment = default_comment
                 item.save()
                 create_activity_handler(
@@ -124,7 +124,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 subject_student.status = 'ongoing'
                 subject_student.save()
 
-                default_comment = 'Your application was accepted for the subject {}'.format(obj.subject.name)
+                default_comment = 'Tu solicitud fue aceptada para la materia: {}'.format(obj.subject.name)
 
                 obj.save()
                 create_activity_handler(

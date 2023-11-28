@@ -24,23 +24,23 @@ def generate_request_tutoring_handler(
         raise APIException(detail="No estas activo para realizar tutorias", code=status.HTTP_400_BAD_REQUEST)
 
     if is_subject_available_handler(subject, user):
-        raise APIException(detail="You haven't taken this subject's prerequisite yet", code=status.HTTP_400_BAD_REQUEST)
+        raise APIException(detail="Aun no has completado el prerequisito de esta materia", code=status.HTTP_400_BAD_REQUEST)
     # para el minimode materia que tiene que tener
     if SubjectStudentModel.objects.filter(student__user=user,status='due').count() > UniversityRuleModel.objects.get(
             id=1).q_of_subj_tutoring:
-        raise APIException(detail="You haven't completed the min of subjects to take tutoring", code=status.HTTP_400_BAD_REQUEST)
+        raise APIException(detail="Aun no has completado el minimo de materias para tomar tutorias", code=status.HTTP_400_BAD_REQUEST)
 
     # para el max de materia que tiene aprovada en tutoria
     if RequesttutoringModel.objects.filter(user=user, period=period,
                                            status=VERIFICATION_STATUS.accepted).count() >= UniversityRuleModel.objects.get(
         id=1).max_by_sub_tutoring:
-        raise APIException(detail="You already have the max of tutoring accepted by period", code=status.HTTP_400_BAD_REQUEST)
+        raise APIException(detail="Tienes el maximo de tutoria aceptada para este periodo", code=status.HTTP_400_BAD_REQUEST)
 
     # para el max de materia que tiene pend8iente en tutoria
     if RequesttutoringModel.objects.filter(user=user, period=period,
                                            status=VERIFICATION_STATUS.pending).count() >= UniversityRuleModel.objects.get(
         id=1).max_by_sub_tutoring:
-        raise APIException(detail="You already have the max of tutoring pending by period", code=status.HTTP_400_BAD_REQUEST)
+        raise APIException(detail="Has alcanzado el maximo de solicitudes pendientes para este periodo", code=status.HTTP_400_BAD_REQUEST)
 
     # para saber si tiene aprovada tutoria
     if RequesttutoringModel.objects.filter(user=user, period=period, subject=subject,
@@ -50,7 +50,7 @@ def generate_request_tutoring_handler(
     # para saber si tiene pendiente tutoria
     if RequesttutoringModel.objects.filter(user=user, period=period, subject=subject,
                                            status=VERIFICATION_STATUS.pending).exists():
-        raise APIException(detail="You already have this subject pending acceptance", code=status.HTTP_400_BAD_REQUEST)
+        raise APIException(detail="Ya tienes una solicitud de esta materia pendiente de aceptacion", code=status.HTTP_400_BAD_REQUEST)
 
     request_tutoring = RequesttutoringModel.objects.create(
         subject=subject,
@@ -71,7 +71,7 @@ def generate_request_tutoring_handler(
         activity_text='TUTORING_REQUEST'
     )
 
-    message_text = 'You have sent a request for tutoring for the subject {}'.format(subject.name)
+    message_text = 'Has enviando una solicitud de tutoria para la materia: {}'.format(subject.name)
 
     create_notification_handler(
         user=user,
