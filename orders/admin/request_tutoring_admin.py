@@ -61,7 +61,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
                 create_notification_handler(
                     user=item.user,
-                    title='Solicitud de tutorias aprovada',
+                    title='Solicitud de tutorias aprobada',
                     request_n=item.request_number,
                     message=default_comment,
                     level='INFO'
@@ -134,10 +134,10 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                     level='INFO',
                     activity_text='TUTORING_REQUEST_ACCEPTED'
                 )
-                if not NotificationModel.objects.filter(title='Solicitud de tutoria aprovada',request_n=obj.request_number).exists():
+                if not NotificationModel.objects.filter(title='Solicitud de tutoria aprobada',request_n=obj.request_number).exists():
                     create_notification_handler(
                         user=obj.user,
-                        title='Solicitud de tutoria aprovada',
+                        title='Solicitud de tutoria aprobada',
                         message=default_comment,
                         request_n=obj.request_number,
                         level='INFO'
@@ -185,7 +185,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 has_error = True
 
             if not SubjectStudentModel.objects.filter(student__user=obj.user,subject=obj.subject,status='due'):
-                messages.error(request, 'Esta materia ya ha sido aprovada por el estudiante.')
+                messages.error(request, 'Esta materia ya ha sido aprobada por el estudiante.')
                 has_error = True
 
             if is_subject_available_handler(obj.subject, obj.user):
@@ -200,7 +200,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 has_error = True
 
 
-            # para el max de materia que tiene aprovada en tutoria
+            # para el max de materia que tiene aprobada en tutoria
             if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period,
                                                    status=VERIFICATION_STATUS.accepted).count() >= UniversityRuleModel.objects.get(
                 id=1).max_by_sub_tutoring:
@@ -217,16 +217,16 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 has_error = True
 
 
-            # para saber si tiene aprovada tutoria
+            # para saber si tiene aprobada tutoria
             if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period, subject=obj.subject,
                                                    status=VERIFICATION_STATUS.accepted).exists():
-                messages.error(request, 'Ya esta materia fue aprovada para este estudiante.')
+                messages.error(request, 'Ya esta materia fue aprobada para este estudiante.')
                 has_error = True
 
 
             # para saber si tiene pendiente tutoria
             if RequesttutoringModel.objects.filter(user=obj.user, period=obj.period, subject=obj.subject, status=VERIFICATION_STATUS.pending).exists():
-                messages.error(request, 'Ya esta materia fue solicitada y esta en proceso de aprovacion para este estudiante.')
+                messages.error(request, 'Ya esta materia fue solicitada y esta en proceso de aprobacion para este estudiante.')
                 has_error = True
 
             if has_error:
