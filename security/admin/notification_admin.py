@@ -4,7 +4,7 @@ from security.models import NotificationModel
 
 
 class NotificationModelAdmin(admin.ModelAdmin):
-    list_display = ('user', 'title', 'level', 'message','unread','created', 'modified')
+    list_display = ('user', 'title','request_n' ,'level', 'message','unread','created', 'modified')
     list_filter = ('user', 'level', 'created', 'modified')
     search_fields = ('user__username', 'activity_text')
     date_hierarchy = 'created'

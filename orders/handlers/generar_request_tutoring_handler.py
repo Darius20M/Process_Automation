@@ -75,7 +75,8 @@ def generate_request_tutoring_handler(
 
     create_notification_handler(
         user=user,
-        title=_('tutoring request sent'),
+        title=_('Solicitud de tutorias enviada'),
+        request_n=request_tutoring.request_number,
         message=message_text,
         level='INFO'
     )

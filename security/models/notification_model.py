@@ -7,6 +7,7 @@ class NotificationModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notifications', on_delete=models.CASCADE)
     level = models.CharField(max_length=30, default="Information")
     title = models.CharField(max_length=255, null=False, blank=False)
+    request_n = models.CharField(max_length=100, null=False, blank=False)
     message = models.TextField(null=False, blank=False)
     unread = models.BooleanField(default=True)
     created = models.DateTimeField(default=timezone.now, editable=False)

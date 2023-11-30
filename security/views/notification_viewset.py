@@ -12,5 +12,5 @@ class NotificationViewSet(ModelViewSet):
     serializer_class = NotificationSerializer
     queryset = NotificationModel.objects.all()
     ordering_fields = ('id', 'created')
-    filterset_fields = ('user', 'level', 'unread', 'created',)
+    filterset_fields = ('user','request_n', 'level', 'unread', 'created',)
     search_fields = ('title', 'user__first_name', 'user__username', 'user__email', 'user__last_name', 'message',)

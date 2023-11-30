@@ -61,8 +61,9 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
                 create_notification_handler(
                     user=item.user,
-                    title='tutoring request accepted',
-                    message=default_comment,
+                    title='Solicitud de tutoria aprobada',
+                    request_n=item.request_number,
+                    message=item.comment,
                     level='INFO'
                 )
                 request = RequesttutoringModel.objects.filter(period=item.period, subject=item.subject, status='pending')
@@ -90,8 +91,9 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
                 create_notification_handler(
                     user=item.user,
-                    title='tutoring request denied',
-                    message=default_comment,
+                    title='Solicitud de tutoria denegada',
+                    request_n=item.request_number,
+                    message=item.comment,
                     level='INFO'
                 )
                 send_email_handler(item, 'deny')
@@ -116,6 +118,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 ClassModel.objects.create(
                     is_tutoring_now = True,
                     student=student,
+
                     subject=obj.subject,
                     period=obj.period
                 )
@@ -135,8 +138,9 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
                 create_notification_handler(
                     user=obj.user,
-                    title='tutoring request accepted',
-                    message=default_comment,
+                    title='Solicitud de tutoria aprobada',
+                    request_n=obj.request_number,
+                    message=obj.comment,
                     level='INFO'
                 )
                 request = RequesttutoringModel.objects.filter(period=obj.period, subject=obj.subject,
@@ -159,8 +163,9 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
                 create_notification_handler(
                     user=obj.user,
-                    title='tutoring request denied',
-                    message=default_comment,
+                    title='Solicitud de tutoria denegada',
+                    request_n=obj.request_number,
+                    message=obj.comment,
                     level='INFO'
                 )
                 send_email_handler(obj, 'deny')
@@ -229,6 +234,13 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 messages.set_level(request, messages.ERROR)
             else:
                 super().save_model(request, obj, form, change)
+                create_notification_handler(
+                    user=obj.user,
+                    title='Solicitud de tutorias enviada',
+                    request_n=obj.request_number,
+                    message=obj.comment,
+                    level='INFO'
+                )
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
