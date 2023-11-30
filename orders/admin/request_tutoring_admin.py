@@ -23,13 +23,13 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
     search_fields = ('request_number', 'user__username', 'user__first_name', 'user__last_name', 'user__email')
     list_per_page = 20
     list_editable = ('comment', 'status')
-    readonly_fields = ('request_number',)
     fieldsets = (
         ('Request Information', {
             'fields': ('subject', 'user', 'career', 'period','status', 'user_verified', 'comment'),
         }),
 
     )
+    readonly_fields = ('request_number',)
 
     def mark_as_Approve(self, request, queryset):
 
@@ -246,7 +246,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return ['request_number', 'subject', 'user', 'career', 'created', 'modified']
+            return ['request_number', 'subject','career', 'created', 'modified']
 
         return []
 
