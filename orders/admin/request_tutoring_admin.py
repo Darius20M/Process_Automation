@@ -14,7 +14,7 @@ from sequences import get_next_value
 
 from orders.utils.constants import VERIFICATION_STATUS
 from security.handlers import create_activity_handler, create_notification_handler
-
+from security.models import NotificationModel
 
 
 class RequesttutoringModelAdmin(admin.ModelAdmin):
@@ -134,14 +134,14 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                     level='INFO',
                     activity_text='TUTORING_REQUEST_ACCEPTED'
                 )
-
-                create_notification_handler(
-                    user=obj.user,
-                    title='Solicitud de tutoria aprovada',
-                    message=default_comment,
-                    request_n=obj.request_number,
-                    level='INFO'
-                )
+                if not NotificationModel.objects.filter(title='Solicitud de tutoria aprovada',request_n=obj.request_number).exists():
+                    create_notification_handler(
+                        user=obj.user,
+                        title='Solicitud de tutoria aprovada',
+                        message=default_comment,
+                        request_n=obj.request_number,
+                        level='INFO'
+                    )
                 request = RequesttutoringModel.objects.filter(period=obj.period, subject=obj.subject,
                                                               status='pending')
                 if request.count() >= UniversityRuleModel.objects.get(
