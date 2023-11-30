@@ -2,3 +2,4 @@ from .testing_view import TestingView
 from .activity_viewset import ActivityViewSet
 from .notification_viewset import NotificationViewSet
 from .google_login_viewset import GoogleLoginView
+from .request_credential_view_set import RequestCredentialViewSet

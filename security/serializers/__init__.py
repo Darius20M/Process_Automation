@@ -1,4 +1,6 @@
 from .testing_session import TestingSerializer
 from .activity_serializer import ActivitySerializer
 from .notification_serializer import NotificationSerializer
+from .request_credentials import RequestCrendentialSerializer
+
 #from .user_serializer import UserSerializer

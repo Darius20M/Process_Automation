@@ -16,19 +16,18 @@
                     </tr>
                     <tr>
                         <td align="center" bgcolor="#BBDEFB" style="padding: 40px 0;">
-                            <h2>Notificación de Creación de Usuario</h2>
+                            <h2>Notificación de solicitud de credenciales</h2>
                         </td>
                     </tr>
                     <tr>
                         <td bgcolor="#ffffff" style="padding: 30px; font-family: Arial, sans-serif;">
-                            <p>Estimado {{ inf.user.first_name }},</p>
-                            <p>Le informamos que su cuenta de usuario en la Universidad Católica Santo Domingo ha sido creada exitosamente.</p>
+                            <p>Estimado {{ name }},</p>
+                            <p>Le informamos que su cuenta de usuario en la Universidad Católica Santo Domingo ha sido actualizada exitosamente.</p>
                             <p>A continuación, se detallan sus credenciales de inicio de sesión:</p>
                             <ul>
-                                <li><strong>Usuario:</strong> {{ inf.user.username }}</li>
-                                <li><strong>Contraseña:</strong> {{ inf.user.username }}</li>
+                                <li><strong>Usuario:</strong> {{ inf }}</li>
+                                <li><strong>Contraseña:</strong> {{ pass }}</li>
                             </ul>
-                            <p>Por favor, asegúrese de cambiar su contraseña temporal en su primer inicio de sesión para garantizar la seguridad de su cuenta.</p>
                             <p>Si tiene alguna pregunta o necesita asistencia, no dude en ponerse en contacto con nuestro equipo de soporte.</p>
                             <p>¡Le damos la bienvenida a la comunidad de la Universidad Católica Santo Domingo!</p>
                         </td>
