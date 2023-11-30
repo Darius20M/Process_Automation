@@ -138,6 +138,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 create_notification_handler(
                     user=obj.user,
                     title='Solicitud de tutoria aprovada',
+                    message=default_comment,
                     request_n=obj.request_number,
                     level='INFO'
                 )
@@ -232,9 +233,12 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                 messages.set_level(request, messages.ERROR)
             else:
                 super().save_model(request, obj, form, change)
+                default_comment = 'Tu solicitud fue generada para la materia: {}'.format(obj.subject.name)
+
                 create_notification_handler(
                     user=obj.user,
                     title='Solicitud de tutoria enviada',
+                    message=default_comment,
                     request_n=obj.request_number,
                     level='INFO'
                 )
