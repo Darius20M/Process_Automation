@@ -242,6 +242,7 @@ class RequesttutoringModelAdmin(admin.ModelAdmin):
                     request_n=obj.request_number,
                     level='INFO'
                 )
+                send_email_handler(obj, 'confirmation')
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
