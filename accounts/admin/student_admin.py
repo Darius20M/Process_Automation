@@ -19,7 +19,7 @@ class StudentProfileAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Personal Information', {
             'fields': (
-            'first_name', 'career', 'last_name', 'student_id', 'date_of_birth', 'gender', 'address', 'contact_phone',
+             'student_id', 'first_name', 'last_name','career', 'date_of_birth', 'gender', 'address', 'contact_phone',
             'email', 'identification_number'),
         }),
         ('Enrollment Information', {

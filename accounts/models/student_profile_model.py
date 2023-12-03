@@ -12,7 +12,7 @@ class StudentProfileModel(models.Model):
     career = models.ForeignKey('general.CareerModel',on_delete=models.PROTECT)
     role = models.ForeignKey('accounts.RoleModel',on_delete=models.PROTECT)
     gender = models.CharField(max_length=10, choices=(('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')))
-    address = models.TextField()
+    address = models.CharField(max_length=100)
     contact_phone = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
     identification_number = models.CharField(max_length=20, unique=True)
